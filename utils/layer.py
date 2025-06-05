@@ -16,18 +16,9 @@ class DotProduct(nn.Module):
         super().__init__()
 
     def forward(self, left, right):
-        """
-
-        Args:
-            left: (batch_size, num_candidate, dim_embedding)
-            right: (batch_size, dim_embedding)
-
-        Returns:
-            (shape): batch_size, candidate_num
-
-        """
         result = torch.bmm(left, right.unsqueeze(dim=-1)).squeeze(dim=-1)
         return result
+        
 class ReshapeLayer(nn.Module):
     def __init__(self, target_shape):
         super(ReshapeLayer, self).__init__()
@@ -68,13 +59,6 @@ class ScaledDotProductAttention(nn.Module):
         self.d_k = d_k
 
     def forward(self, Q, K, V, attn_mask=None):
-        """
-            Q: batch_size, n_head, candidate_num, d_k
-            K: batch_size, n_head, candidate_num, d_k
-            V: batch_size, n_head, candidate_num, d_v
-            attn_mask: batch_size, n_head, candidate_num
-            Return: batch_size, n_head, candidate_num, d_v
-        """
         scores = torch.matmul(Q, K.transpose(-1, -2)) / np.sqrt(self.d_k)
         scores = torch.exp(scores)
 
@@ -106,12 +90,6 @@ class MultiHeadAttention(nn.Module):
 
 
     def forward(self, Q, K, V, mask=None):
-        """
-            Q: batch_size, candidate_num, news_dim
-            K: batch_size, candidate_num, news_dim
-            V: batch_size, candidate_num, news_dim
-            mask: batch_size, candidate_num
-        """
         batch_size = Q.shape[0]
         if mask is not None:
             mask = mask.unsqueeze(dim=1).expand(-1, self.head_num, -1)
