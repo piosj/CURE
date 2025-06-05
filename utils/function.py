@@ -4,9 +4,6 @@ import torch.nn.functional as F
 
 
 def masked_softmax(X, valid_lens):
-    """Perform softmax operation by masking elements on the last axis.
-    Defined in :numref:`sec_attention-scoring-functions`"""
-    # X: 3D tensor, valid_lens: 1D or 2D tensor
     def _sequence_mask(X, valid_len, value=0):
         maxlen = X.size(1)
         mask = torch.arange((maxlen), dtype=torch.float32,
@@ -22,8 +19,7 @@ def masked_softmax(X, valid_lens):
             valid_lens = torch.repeat_interleave(valid_lens, shape[1])
         else:
             valid_lens = valid_lens.reshape(-1)
-        # On the last axis, replace masked elements with a very large negative
-        # value, whose exponentiation outputs 0
+            
         X = _sequence_mask(X.reshape(-1, shape[-1]), valid_lens, value=-1e4)
         return nn.functional.softmax(X.reshape(shape), dim=-1)
 
@@ -53,3 +49,4 @@ def pad_tensor_to_shape(input_tensor, target_shape=(50, 10)):
     padded_tensor = F.pad(input_tensor, (0, padding_width, 0, padding_height))
 
     return padded_tensor
+
