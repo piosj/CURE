@@ -7,7 +7,7 @@ from utils.nce_loss import NCELoss
 from utils.MSA_news_encoder import NewsEncoder
 
 
-class TUDOR(nn.Module):
+class CURE(nn.Module):
     """
     News Encoder
     initialize news embeddings
@@ -32,7 +32,7 @@ class TUDOR(nn.Module):
     """
     
     def __init__(self, all_news_ids, news_id_to_info, user_num, cat_num, news_num, pretrained_word_embedding=None, emb_dim=100, batch_size=300, snapshots_num=1680, config=None):
-        super(TUDOR, self).__init__()
+        super(CURE, self).__init__()
         self.config = config
         self.batch_size = batch_size
         self.emb_dim = emb_dim
