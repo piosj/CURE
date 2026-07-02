@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 from model.config import get_config
-from model.TUDOR import TUDOR
+from model.CURE import CURE
 from utils.make_train_datas_1w import make_train_datas
 from utils.make_test_datas_1w import make_test_datas
 from utils.time_split_batch import split_train_graph
@@ -138,7 +138,7 @@ def main():
     wandb.watch(model, log="all")
     
     # Initialize model
-    model = TUDOR(
+    model = CURE(
         all_news_ids,
         news_id_to_info,
         user_num,
