@@ -1,4 +1,4 @@
-# CODE_DATA (TUDOR)
+# CODE_DATA (CURE)
 There's several additional data, however due to large file size of 'behaviors.tsv', it is not available to upload full file.
 Instead, make README.md to describe code & datas by descriptions.
 ** All the files in here are just the samples.
@@ -28,8 +28,8 @@ Instead, make README.md to describe code & datas by descriptions.
   Experiment settings and hyperparameter definitions.
 - `main.py`  
   File for training and evaluation pipeline.
-- `TUDOR.py`  
-  TUDOR model architecture.
+- `CURE.py`  
+  CURE model architecture.
 
 #### preprocess
 - `make_1w_datas.py`  
